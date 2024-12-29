@@ -20,11 +20,19 @@ public class ExaminerServiceImpl implements ExaminerService{
     }
     @Override
     public Collection<Question> getQuestions(int amount) {
-
-        int size = questionService.getSize();
-        if(amount <= 0 || size < amount){
+        Collection<Question> allQuestions = questionService.getAll();
+        if (amount > allQuestions.size()) {
             throw new NotEnoughQuestionException();
         }
+
+        if (amount == allQuestions.size()) {
+            return allQuestions;
+        }
+
+         //int size = questionService.getSize();
+        //if(amount <= 0 || size < amount){
+           // throw new NotEnoughQuestionException();
+        //}
 
         Set<Question> questions = new HashSet<>();
         while (questions.size() < amount) {
