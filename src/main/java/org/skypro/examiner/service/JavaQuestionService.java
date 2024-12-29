@@ -3,42 +3,43 @@ package org.skypro.examiner.service;
 import org.skypro.examiner.model.Question;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+
 @Service
- public class JavaQuestionService implements QuestionService{
-    Set<Question> questions;
-    public JavaQuestionService() {
-        this.questions = new HashSet<Question>();
-    }
+ public final class JavaQuestionService implements QuestionService{
+   private final Set<Question> questionRepository = new HashSet<>();
+   private Random random = new Random();
+   public void setRandom(Random random){
+       this.random = random;
+   }
+
     @Override
-    public Question add(String question, String answer) {
-        Question newQuestion = new Question(question,answer);
-        questions.add(newQuestion);
-        return newQuestion;
+    public boolean add(String question, String answer) {
+        return questionRepository.add(new Question(question, answer));
     }
+
     @Override
-    public Question add(Question question) {
-        questions.add(question);
-        return question;
+    public int getSize() {
+        return 0;
     }
+
     @Override
-    public Question remove(Question question) {
-        questions.remove(question);
-        return question;
+    public boolean remove(String question, String answer) {
+        return questionRepository.remove(new Question(question, answer));
     }
+
     @Override
     public Collection<Question> getAll() {
-        return questions;
+        return Set.copyOf(questionRepository);
     }
     @Override
     public Question getRandomQuestion() {
-        Random random = new Random();
-        int randomID = random.nextInt(questions.size() + 1);
-        return (Question) questions.toArray()[randomID];
+        return List.copyOf(questionRepository).get(random.nextInt(questionRepository.size()));}
+
     }
+    //@Override
+    //public int getSize(){
+    //return questionRepository.size();}
 
 
-}
+

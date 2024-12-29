@@ -1,5 +1,6 @@
 package org.skypro.examiner.service;
 
+import org.skypro.examiner.exception.NotEnoughQuestionException;
 import org.skypro.examiner.model.Question;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class ExaminerServiceImpl implements ExaminerService{
     public Collection<Question> getQuestions(int amount) {
         Collection<Question> allQuestions = questionService.getAll();
         if (amount > allQuestions.size()) {
-            throw new NotEnoughQuestionsException();
+            throw new NotEnoughQuestionException();
         }
 
         if (amount == allQuestions.size()) {
