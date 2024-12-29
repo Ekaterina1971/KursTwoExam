@@ -17,16 +17,16 @@ public class JavaQuestionController {
         this.service = service;
     }
     @GetMapping("/add")
-    public void addQuestion(@RequestParam String question, @RequestParam String answer){
-        service.add(question, answer);
+    public boolean addQuestion(@RequestParam String question, @RequestParam String answer){
+        return service.add(question, answer);
     }
     @GetMapping()
-    public Collection<Question> getQuestion(){
+    public Collection<Question> getAll(){
         return service.getAll();
     }
     @GetMapping("/remove")
-    public void removeQuestion(@RequestParam String question, @RequestParam String answer){
-        service.remove(question, answer);
+    public boolean removeQuestion(@RequestParam String question, @RequestParam String answer){
+        return service.remove(question, answer);
     }
 
 }
