@@ -37,9 +37,7 @@ import java.util.*;
         return List.copyOf(questionRepository).get(random.nextInt(questionRepository.size()));}
 
     }
-    //@Override
-    //public int getSize(){
-   // return questionRepository.size();}
+
 
 
 
